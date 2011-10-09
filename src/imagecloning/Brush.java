@@ -9,6 +9,7 @@ public class Brush implements Serializable
 {
 	Color color = new Color((float)198/255, (float)226/255, (float)1.0, (float)0.02);
 	public int radius = 20;
+	
 	public ArrayList points;
 
 	public Brush(){
