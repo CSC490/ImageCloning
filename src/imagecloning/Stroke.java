@@ -4,37 +4,105 @@ package imagecloning;
 import java.awt.*;
 import java.util.*;
 import java.io.*;
+import java.awt.geom.*;
+
 
 public class Stroke implements Serializable
 {
-	Color color = Color.black;
-	public ArrayList points;
-
+	private ArrayList <Point> points;
+	private  boolean isNewStroke;
+	public  GeneralPath shape = null;
 	
+	/*
+	 * Stroke class constructor
+	 */
 	public Stroke(){
-		points = new ArrayList();
+		isNewStroke = true; // No position defined yet.
+		points = new ArrayList<Point>(); // Colection of points.
+		shape = new GeneralPath(GeneralPath.WIND_EVEN_ODD); // Our stroke.
 	}
 
+	
+	public Stroke(ArrayList points) {
+		isNewStroke = true; // No position defined yet.
+		
+		shape = new GeneralPath(GeneralPath.WIND_EVEN_ODD); // Our stroke.
+		
+		this.points = new ArrayList<Point>(points);
+	}
+	
+	/*
+	 * Adding a new point to the shape
+	 */
 	public void addPoint(Point p){
 		points.add(p);
 	}
 
-	public void paint(Graphics g){
-
-		if (color == null) return;
-		g.setColor(color);
-		for(int i=0; i< points.size()-1; i++){
-			Point p0 = (Point)points.get(i);
-			Point p1 = (Point)points.get(i+1);
-			if(p0!=null && p1!=null){
-				g.drawLine(p0.x, p0.y, p1.x, p1.y);
+	
+	public void paintAll(Graphics g){
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setPaint(Color.red);
+		
+		if(!points.isEmpty()){ // Dont draw if there are no points.
+			
+			for (int i = 0; i < points.size();i++){
+				if (isNewStroke) {
+					// Move to the start of the the new stroke. It should be the last point added.
+					shape.moveTo(points.get(0).x, points.get(0).y);
+					isNewStroke = false;
+				} else {
+					//Draw line to the last point added.
+					shape.lineTo(points.get(i).x, points.get(i).y);
+				}
 			}
-		}
-		if (points.size() == 1){
-			Point p0 = (Point)points.get(0);
-			g.drawLine(p0.x, p0.y, p0.x, p0.y);
+			g2d.draw(shape);
 		}
 	}
 	
+	
+	/*
+	 * Paint the shape on the graphics provided.
+	 */
+	public void paint(Graphics g){
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setPaint(Color.black);
+		
+		if(!points.isEmpty()){ // Dont draw if there are no points.
+			int lastIndex = points.size() - 1;
+			if (isNewStroke) {
+				System.out.println("Started New stroke");
+				// Move to the start of the the new stroke. It should be the last point added.
+				shape.moveTo(points.get(lastIndex).x, points.get(lastIndex).y);
+				isNewStroke = false;
+			} else {
+				//Draw line to the last point added.
+				shape.lineTo(points.get(lastIndex).x, points.get(lastIndex).y);
+			}
 
+			g2d.draw(shape);
+		}
+	}
+	
+	/*
+	 * Indicate that a new stroke is going to be drawn 
+	 * starting from the next point.
+	 */
+	public void startNewStroke() {
+		isNewStroke = true;
+	}
+	
+	public Area getArea(){
+		return new Area(shape);
+	}
+
+	public void clear() {
+		points.clear();
+		shape.reset();
+	}
+
+	public ArrayList getPoints(){
+		return points;
+	}
+
+	
 }

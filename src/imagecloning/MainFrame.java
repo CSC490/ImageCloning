@@ -9,10 +9,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 import Constant.Constants;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
@@ -56,7 +52,7 @@ public class MainFrame extends JFrame{
 		JMenuItem clearMenuItem = new JMenuItem("Clear");
 		JMenuItem drawingMenuItem = new JMenuItem("Drawing Mode");
 		JMenuItem brushingMenuItem = new JMenuItem("Brushing Mode");
-				
+		JMenuItem substractMenuItem = new JMenuItem("Substract");
 		
 		
 		
@@ -95,12 +91,22 @@ public class MainFrame extends JFrame{
 					}
 				});
 		
+		substractMenuItem.addActionListener(
+				new ActionListener(){
+				@Override
+					public void actionPerformed(ActionEvent ae) {
+						drawingPanel.substract();
+					}
+				});
+		
+		
 		fileMenu.add(drawingMenuItem);
 		fileMenu.add(brushingMenuItem);
+		fileMenu.add(substractMenuItem);
 		fileMenu.add(clearMenuItem);
 		fileMenu.addSeparator();
 		fileMenu.add(exitMenuItem);
-	
+		
 		
 		setJMenuBar(menuBar);
 		

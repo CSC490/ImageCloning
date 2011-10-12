@@ -11,7 +11,7 @@ package Constant;
  */
 public interface Constants {
 	
-	// Modes for drawingqwewqewqe
+	// Modes for drawing
 	
 	
 	
@@ -19,5 +19,5 @@ public interface Constants {
 	public static final int DRAWING = 1;
 	public static final int BRUSHING = 2;	
 	public static final int CLONING = 3;
-	public static final int CLG = 56;
+	public static final int SUBSTRACTING = 56;
 }
