@@ -8,6 +8,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
 import Constant.Constants;
+import javax.swing.border.LineBorder;
 
 
 /**
@@ -23,7 +24,8 @@ public class MainFrame extends JFrame{
 	 * MainFrame Constructor
 	 */
 	public MainFrame() {
-		
+		super("Image Cloning");
+		super.setBackground(Color.white);
 		this.addWindowListener(
 		  new WindowAdapter(){
 			public void windowClosing(WindowEvent e) {System.exit(0);}}
@@ -39,8 +41,8 @@ public class MainFrame extends JFrame{
 	 * Main Frame initializer
 	 */
 	private void initMainFrame(){
-		setTitle("ImageCloning");
-		setSize(800, 400);
+		
+		setSize(900, 500);
 		
 		setResizable(false); // TO DO: Figured out resizing
 		// Creating a Menu
@@ -132,19 +134,19 @@ public class MainFrame extends JFrame{
 	 * Create and add Panels to the Frame
 	 */
 	private void createPanels(){
+		JPanel d = new JPanel(new GridLayout(1,1));
 		drawingPanel = new DrawingPanel();
-		//drawingPanel.setSize(399, 400);
-		add(drawingPanel);
-			
-//		JSeparator separator = new JSeparator(JSeparator.VERTICAL);
-//		separator.setBackground(Color.BLACK);
-//		separator.setSize(1, 400);
-//		add(separator);
+		d.setBorder(new LineBorder (Color.black, 5)); 
+		d.add(drawingPanel);
+		getContentPane().add(d);
 		
+		JPanel d2 = new JPanel(new GridLayout(1,1));
 		clonePanel = new ClonePanel();
-		clonePanel.setBackground(Color.green);
-		//clonePanel.setSize(400, 400);
-		add(clonePanel);
+		d2.setBorder(new LineBorder (Color.black, 5)); 
+		d2.add(clonePanel);
+		getContentPane().add(d2);
+		
+		
 	};
 
 }

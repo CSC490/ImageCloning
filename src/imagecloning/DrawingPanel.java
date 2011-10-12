@@ -8,7 +8,6 @@ import java.awt.geom.*;
 import java.util.ArrayList;
 
 class DrawingPanel extends JPanel {
-
 	
 	public int operation_status = Constants.DRAWING;
 	public boolean clear_drawings = true; // Should clear the drawing panel
@@ -21,6 +20,7 @@ class DrawingPanel extends JPanel {
 	
 	public DrawingPanel(){
 		// Mouse Controls
+		super();
 		
 		stroke = new Stroke();
 		brush = new Brush();
@@ -61,14 +61,11 @@ class DrawingPanel extends JPanel {
 		} else{
 			// paint code!
 			if (operation_status == Constants.DRAWING) {
-				stroke.paint(g);
+				if (stroke!=null) stroke.paint(g);
 			} else if (operation_status ==  Constants.BRUSHING) {
-				brush.paint(g);
+				if (brush!=null) brush.paint(g);
 			} else if (operation_status == Constants.SUBSTRACTING) {
-				//g.clearRect(0, 0, getSize().width, getSize().height);	
-				//clear_drawings = false;
-				//brush.paintBrushingArea(g);
-				if (!cloneArray.isEmpty()){ 
+				if (cloneArray !=null && !cloneArray.isEmpty()){ 
 					for (int i=0; i < cloneArray.size();i++){
 						cloneArray.get(i).paintAll(g);
 					}
