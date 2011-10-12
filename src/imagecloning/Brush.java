@@ -8,7 +8,7 @@ import java.awt.geom.*;
 
 public class Brush implements Serializable
 {
-	//private Color color = new Color((float)198/255, (float)226/255, (float)1.0, (float)0.02);
+	
 	private Color color = new Color((float)100/255, (float)149/255, (float)237/255, (float)0.05);
 	private int diameter = 20;
 	private  Area brushingArea;
@@ -23,7 +23,7 @@ public class Brush implements Serializable
 
 	public void addPoint(Point p) {
 		points.add(p);
-		//brushingPoints.add(p);
+		
 		for (int i = 0; i <= diameter; i++) {
 			for (int j = 0; j <= diameter; j++) {
 				Point new_p = new Point(p.x + i, p.y +j);
@@ -66,6 +66,7 @@ public class Brush implements Serializable
 	
 	public void clear() {
 		points.clear();
+		brushingPoints.clear();
 		brushingArea.reset();
 	}
 	

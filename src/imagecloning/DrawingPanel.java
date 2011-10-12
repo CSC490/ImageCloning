@@ -39,7 +39,16 @@ class DrawingPanel extends JPanel {
 	public void clearDrawingPanel(){
 		//strokesArray.clear();
 		clear_drawings = true;
+		cloneArray.clear();
+		strokesArray.clear();
+		brush.clear();
+		stroke.clear();
 		repaint();
+	}
+	
+	
+	public ArrayList getCloneArray(){
+		return cloneArray;
 	}
 	
 	@Override
@@ -58,19 +67,14 @@ class DrawingPanel extends JPanel {
 			} else if (operation_status == Constants.SUBSTRACTING) {
 				//g.clearRect(0, 0, getSize().width, getSize().height);	
 				//clear_drawings = false;
-				brush.paintBrushingArea(g);
+				//brush.paintBrushingArea(g);
 				if (!cloneArray.isEmpty()){ 
 					for (int i=0; i < cloneArray.size();i++){
 						cloneArray.get(i).paintAll(g);
 					}
 				}
 				
-				
-//				Graphics2D g2d = (Graphics2D) g;
-//				g2d.setPaint(Color.black);
-//				g2d.draw(substract);
-//				}
-			
+		
 			}
 	
 		}

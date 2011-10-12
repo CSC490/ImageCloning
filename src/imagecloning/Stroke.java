@@ -45,15 +45,9 @@ public class Stroke implements Serializable
 		
 		if(!points.isEmpty()){ // Dont draw if there are no points.
 			
-			for (int i = 0; i < points.size();i++){
-				if (isNewStroke) {
-					// Move to the start of the the new stroke. It should be the last point added.
-					shape.moveTo(points.get(0).x, points.get(0).y);
-					isNewStroke = false;
-				} else {
-					//Draw line to the last point added.
-					shape.lineTo(points.get(i).x, points.get(i).y);
-				}
+			shape.moveTo(points.get(0).x, points.get(0).y);
+			for (int i = 1; i < points.size();i++){
+				shape.lineTo(points.get(i).x, points.get(i).y);
 			}
 			g2d.draw(shape);
 		}

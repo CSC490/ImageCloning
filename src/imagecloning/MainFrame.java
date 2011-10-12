@@ -17,6 +17,7 @@ import Constant.Constants;
 public class MainFrame extends JFrame{
 	
 	private DrawingPanel drawingPanel;
+	private ClonePanel clonePanel;
 	
 	/*
 	 * MainFrame Constructor
@@ -53,7 +54,7 @@ public class MainFrame extends JFrame{
 		JMenuItem drawingMenuItem = new JMenuItem("Drawing Mode");
 		JMenuItem brushingMenuItem = new JMenuItem("Brushing Mode");
 		JMenuItem substractMenuItem = new JMenuItem("Substract");
-		
+		JMenuItem cloneMenuItem = new JMenuItem("Clone");
 		
 		
 		exitMenuItem.addActionListener(
@@ -100,9 +101,21 @@ public class MainFrame extends JFrame{
 				});
 		
 		
+		
+		cloneMenuItem.addActionListener(
+				new ActionListener(){
+				@Override
+					public void actionPerformed(ActionEvent ae) {
+						clonePanel.clone(drawingPanel.getCloneArray());
+						clonePanel.repaint();
+					}
+				});
+		
+		
 		fileMenu.add(drawingMenuItem);
 		fileMenu.add(brushingMenuItem);
 		fileMenu.add(substractMenuItem);
+		fileMenu.add(cloneMenuItem);
 		fileMenu.add(clearMenuItem);
 		fileMenu.addSeparator();
 		fileMenu.add(exitMenuItem);
@@ -110,7 +123,7 @@ public class MainFrame extends JFrame{
 		
 		setJMenuBar(menuBar);
 		
-		setLayout(new GridLayout(1, 2));
+		setLayout(new GridLayout(1,2));
 		
 	}
 	
@@ -120,13 +133,18 @@ public class MainFrame extends JFrame{
 	 */
 	private void createPanels(){
 		drawingPanel = new DrawingPanel();
-		drawingPanel.setBackground(Color.yellow);
+		//drawingPanel.setSize(399, 400);
 		add(drawingPanel);
 			
-		JPanel panel2 = new JPanel();
-		panel2.setSize(400, 400);
-		panel2.setBackground(Color.green);
-		add(panel2);
+//		JSeparator separator = new JSeparator(JSeparator.VERTICAL);
+//		separator.setBackground(Color.BLACK);
+//		separator.setSize(1, 400);
+//		add(separator);
+		
+		clonePanel = new ClonePanel();
+		clonePanel.setBackground(Color.green);
+		//clonePanel.setSize(400, 400);
+		add(clonePanel);
 	};
 
 }
